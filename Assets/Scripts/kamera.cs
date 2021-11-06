@@ -5,20 +5,29 @@ using UnityEngine;
 public class kamera : MonoBehaviour
 {
     //variable
-    [SerializeField]private float sensitivity;
+    [SerializeField]private float sensitivity; //sensitifitas mouse ke arah kamera
+
     //referensi
-    private Transform parent;
+    private Transform parent; //ambil transform parent kamera
+
     // Start is called before the first frame update
     void Start()
     {
-        parent = transform.parent;
-        Cursor.lockState = CursorLockMode.Locked;
+        parent = transform.parent; //karena private dipanggil di void start
+        Cursor.lockState = CursorLockMode.Locked; //pada game tidak akan memperlihatkan kursor
     }
 
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse x") *sensitivity * Time.deltaTime; //membuat float baru
-        parent.Rotate(Vector3.up, mouseX);
+        Rotate();
+        
+    }
+
+    private void Rotate()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+
+        parent.Rotate(Vector3.up, mouseX); //merubah rotasi kamera nilai yang diinput mouse x
     }
 }

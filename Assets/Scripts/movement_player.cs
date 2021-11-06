@@ -5,12 +5,12 @@ using UnityEngine;
 public class movement_player : MonoBehaviour
 {
     //variable
-    [SerializeField]public float kecepatan; //menampung nilai lari dan jalan player
+    [SerializeField]public float kecepatan; //diubah menjadi public supaya bisa diambil
     public float x; //menampung nilai input arah x
     public float z; //menampung nilai input arah z
     [SerializeField]private float speed_jump = 3f;
-    [SerializeField]private float speed_jalan = 4f;
-    [SerializeField]private float speed_lari = 8f;
+    [SerializeField]public float speed_jalan = 4f;
+    [SerializeField]public float speed_lari = 8f;
      
 
     [SerializeField] private float gravitasi = -9.81f;

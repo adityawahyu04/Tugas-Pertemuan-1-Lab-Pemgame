@@ -28,6 +28,7 @@ public class animasea : MonoBehaviour
         nilai_x = player.GetComponent<movement_player>().x;
         nilai_z = player.GetComponent<movement_player>().z;
         status_ground = player.GetComponent<movement_player>().isGrounded;
+        //memasukkan nilai x,z dan status ground
         anim.SetFloat("x", nilai_x);
         anim.SetFloat("z", nilai_z);
         anim.SetBool("isGrounded", status_ground);
