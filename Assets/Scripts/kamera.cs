@@ -20,14 +20,13 @@ public class kamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Rotate();
+        if (!HUDManager.GameIsPaused)
+        {
+            float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+            parent.Rotate(Vector3.up, mouseX); //merubah rotasi kamera nilai yang diinput mouse x
+        }
         
     }
 
-    private void Rotate()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-
-        parent.Rotate(Vector3.up, mouseX); //merubah rotasi kamera nilai yang diinput mouse x
-    }
+    
 }
