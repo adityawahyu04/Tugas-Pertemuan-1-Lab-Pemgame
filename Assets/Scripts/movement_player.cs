@@ -5,7 +5,7 @@ using UnityEngine;
 public class movement_player : MonoBehaviour
 {
     //variable
-    [SerializeField]public float kecepatan; //diubah menjadi public supaya bisa diambil
+    public float kecepatan; //diubah menjadi public supaya bisa diambil
     public float x; //menampung nilai input arah x
     public float z; //menampung nilai input arah z
     [SerializeField]private float speed_jump = 3f;

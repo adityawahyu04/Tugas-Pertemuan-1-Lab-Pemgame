@@ -4,28 +4,31 @@ using UnityEngine;
 
 public class kamera : MonoBehaviour
 {
-    //variable
-    [SerializeField]private float sensitivity; //sensitifitas mouse ke arah kamera
+    //variabel
+    [SerializeField] private float kecepatanRotasi = 1f;
+    [SerializeField] private float mouseX, mouseY;
 
     //referensi
-    private Transform parent; //ambil transform parent kamera
-
+    public Transform player,target;
     // Start is called before the first frame update
     void Start()
     {
-        parent = transform.parent; //karena private dipanggil di void start
-        Cursor.lockState = CursorLockMode.Locked; //pada game tidak akan memperlihatkan kursor
+
+       Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!HUDManager.GameIsPaused)
-        {
-            float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-            parent.Rotate(Vector3.up, mouseX); //merubah rotasi kamera nilai yang diinput mouse x
-        }
-        
+        mouseX += Input.GetAxis("Mouse X") * kecepatanRotasi;
+        mouseY += Input.GetAxis("Mouse Y") * kecepatanRotasi;
+
+        mouseY = Mathf.Clamp(mouseY, -35, 60);
+        transform.LookAt(target);
+
+        target.rotation = Quaternion.Euler(mouseY, mouseX, 0);
+        player.rotation = Quaternion.Euler(0, mouseX, 0);
     }
 
     

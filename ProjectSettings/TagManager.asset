@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fire
   - My Lighting
+  - Obstacle
   layers:
   - Default
   - TransparentFX

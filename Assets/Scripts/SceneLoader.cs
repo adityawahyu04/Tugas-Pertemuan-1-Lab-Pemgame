@@ -16,6 +16,14 @@ public class SceneLoader : MonoBehaviour
     {
         loadingScreen.SetActive(true);
         StartCoroutine(LoadAsync(sceneIndex));
+        loadStatus = false;
+    }
+
+    public void LoadSaveGame(int sceneIndex)
+    {
+        loadingScreen.SetActive(true);
+        StartCoroutine(LoadAsync(sceneIndex));
+        loadStatus = true;
         
     }
 

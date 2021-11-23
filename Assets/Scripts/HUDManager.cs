@@ -10,6 +10,7 @@ public class HUDManager : MonoBehaviour
     public Text time;
     [SerializeField] GameObject pauseMenu;
     public static bool GameIsPaused = false;
+    public Player playerInstance;
 
     private float energy = 200;
     private float maxEnergy = 200;
@@ -17,6 +18,11 @@ public class HUDManager : MonoBehaviour
     private float kecepatanLari;
     private float input_x;
     private float input_z;
+
+    //HUD darah
+    private float darah;
+    private float maxDarah;
+    public Image currentDarah;
     
 
     private GameObject player;
@@ -33,10 +39,12 @@ public class HUDManager : MonoBehaviour
         kecepatan = player.GetComponent<movement_player>().kecepatan;
         input_x = player.GetComponent<movement_player>().x;
         input_z = player.GetComponent<movement_player>().z;
+        darah = player.GetComponent<sistem_darah>().darah_player;
         EnergyDrain();
         UpdateEnergy();
         UpdateTime();
         ShowPauseMenu();
+        UpdateDarah();
 
     }
 
@@ -133,6 +141,17 @@ public class HUDManager : MonoBehaviour
         GameIsPaused = true;
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void SaveGame()
+    {
+        SaveSystem.SavePlayer(playerInstance);
+    }
+
+    private void UpdateDarah()
+    {
+        float ratio = darah / maxDarah;
+        currentDarah.rectTransform.localScale = new Vector3(ratio, 1, 1);
     }
 
 }
