@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HUDManager : MonoBehaviour
 {
@@ -21,8 +22,12 @@ public class HUDManager : MonoBehaviour
 
     //HUD darah
     private float darah;
-    private float maxDarah;
+    private float maxDarah = 100f;
     public Image currentDarah;
+
+    [SerializeField] GameObject GameOverMenu;
+    [SerializeField] GameObject information;
+    string info;
     
 
     private GameObject player;
@@ -31,6 +36,9 @@ public class HUDManager : MonoBehaviour
     {
         player = GameObject.Find("Player");
         kecepatanLari = player.GetComponent<movement_player>().speed_lari;
+
+        GameIsPaused = false;
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -40,11 +48,17 @@ public class HUDManager : MonoBehaviour
         input_x = player.GetComponent<movement_player>().x;
         input_z = player.GetComponent<movement_player>().z;
         darah = player.GetComponent<sistem_darah>().darah_player;
+        info = player.GetComponent<sistem_darah>().info;
+
+        Text pesan = information.GetComponent<Text>();
+        pesan.text = info;
+
         EnergyDrain();
         UpdateEnergy();
         UpdateTime();
         ShowPauseMenu();
         UpdateDarah();
+        gameOver();
 
     }
 
@@ -152,6 +166,25 @@ public class HUDManager : MonoBehaviour
     {
         float ratio = darah / maxDarah;
         currentDarah.rectTransform.localScale = new Vector3(ratio, 1, 1);
+    }
+
+    public void gameOver()
+    {
+        if(darah < 1)
+        {
+            //player mati
+            GameOverMenu.SetActive(true);
+            GameIsPaused = true;
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+    }
+
+    public void restart()
+    {
+        //sama seperti merubah scene
+        SceneManager.LoadScene("SampleScene");
     }
 
 }
